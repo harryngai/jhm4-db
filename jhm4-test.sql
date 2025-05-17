@@ -7,3 +7,8 @@ CREATE TABLE STUDENT (
     DOB   DATE,
     CLASS VARCHAR(10)
 );
+ 
+INSERT INTO STUDENT (SID, SNAME, SEX, DOB, CLASS) VALUES
+('S001', '陳大文', 'M', '2006-02-15', '4A'),
+('S002', '李小明', 'M', '2005-11-23', '4B'),
+('S003', '王美麗', 'F', '2006-05-30', '4A');
