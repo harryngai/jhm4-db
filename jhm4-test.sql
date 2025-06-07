@@ -1,4 +1,4 @@
--- CREATE DATABASE jhm4_test; -- 建立資料庫
+CREATE DATABASE jhm4_test; -- 建立資料庫
 USE jhm4_test; -- 使用該資料庫
 
 -- 首先創建班級表，因為學生表會引用它
