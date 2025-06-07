@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS jhm4_test; -- 如果存在則刪除資料庫
 CREATE DATABASE jhm4_test; -- 建立資料庫
 USE jhm4_test; -- 使用該資料庫
 
@@ -51,35 +52,3 @@ CREATE TABLE Class_Teacher ( -- 創建班級導師關聯表
     FOREIGN KEY (class_id) REFERENCES Class(class_id), -- 外鍵參照班級表的班級編號
     FOREIGN KEY (teacher_id) REFERENCES Teacher(teacher_id) -- 外鍵參照教師表的教師編號
 );
-
--- 範例資料插入
-INSERT INTO Class (class_id, class_name, grade) VALUES -- 插入班級資料
-(1, '4A', 4), -- 班級1：4A，4年級
-(2, '4B', 4); -- 班級2：4B，4年級
-
-INSERT INTO Student (student_id, name, gender, birthday, class_id) VALUES -- 插入學生資料
-(1, '陳大文', 'M', '2006-02-15', 1), -- 學生1：陳大文，男，生日2006-02-15，屬於班級1
-(2, '李小明', 'M', '2005-11-23', 2), -- 學生2：李小明，男，生日2005-11-23，屬於班級2
-(3, '王美麗', 'F', '2006-05-30', 1); -- 學生3：王美麗，女，生日2006-05-30，屬於班級1
-INSERT INTO Teacher (teacher_id, name, gender, department) VALUES -- 插入教師資料
-(1, '張志明', 'M', '數學系'), -- 教師1：張志明，男，數學系
-(2, '林美華', 'F', '自然科學系'), -- 教師2：林美華，女，自然科學系
-(3, '李國強', 'M', '語言系'); -- 教師3：李國強，男，語言系
-
-INSERT INTO Course (course_id, course_name, credit, department, teacher_id) VALUES -- 插入課程資料
-(101, '數學', 4, '數學系', 1), -- 課程101：數學，4學分，數學系，由教師1任教
-(102, '物理', 3, '自然科學系', 2), -- 課程102：物理，3學分，自然科學系，由教師2任教
-(103, '英文', 3, '語言系', 3); -- 課程103：英文，3學分，語言系，由教師3任教
-
--- 範例選課資料
-INSERT INTO Student_Course (student_id, course_id) VALUES -- 插入學生選課關係
-(1, 101), -- 學生1選了課程101
-(1, 102), -- 學生1選了課程102
-(2, 101), -- 學生2選了課程101
-(2, 103), -- 學生2選了課程103
-(3, 102); -- 學生3選了課程102
-
--- 範例班導師關係
-INSERT INTO Class_Teacher (class_id, teacher_id) VALUES -- 插入班級導師關係
-(1, 2), -- 班級1的導師是教師2
-(2, 1); -- 班級2的導師是教師1
