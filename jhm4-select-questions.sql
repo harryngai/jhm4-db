@@ -6,57 +6,71 @@ USE jhm4_test;
 
 -- 1. 簡單查詢：查詢所有學生的姓名和性別 (Simple query: Query all students' names and genders)
 -- 你的答案 (Your answer):
-
+SELECT name, gender FROM Student
 
 -- 2. 條件查詢：查詢所有男學生的資料 (Conditional query: Query data for all male students)
 -- 你的答案 (Your answer):
-
+SELECT * FROM Student WHERE gender = 'M';
 
 -- 3. 排序查詢：查詢所有學生的資料，按出生日期由早到晚排序 (Sorted query: Query all student data, ordered by birth date from earliest to latest)
 -- 你的答案 (Your answer):
-
+SELECT * FROM Student ORDER BY birthday ASC;
 
 -- 4. 限制結果數量：查詢前3名最年輕的學生資料 (Limited result query: Query data for the 3 youngest students)
 -- 你的答案 (Your answer):
-
+SELECT * FROM Student ORDER BY birthday DESC LIMIT 3;
 
 -- 中級查詢 (Intermediate Queries)
 -- =====================================================
 
 -- 5. 單表聚合函數：統計總共有多少名學生 (Single-table aggregate function: Count the total number of students)
 -- 你的答案 (Your answer):
-
+SELECT COUNT(*) AS total_student FROM Student;
 
 -- 6. 分組統計：統計每個年級有多少個班級 (Group statistics: Count how many classes there are in each grade)
 -- 你的答案 (Your answer):
-
+SELECT grade, COUNT(*) AS class_count FROM `Class` GROUP BY grade ORDER BY grade;
 
 -- 7. 條件統計：統計每個性別的學生人數 (Conditional statistics: Count the number of students for each gender)
 -- 你的答案 (Your answer):
-
+SELECT gender, COUNT(*) as student_count FROM Student GROUP BY gender;
 
 -- 8. 範圍查詢：查詢學分數在3到4之間的課程資料 (Range query: Query courses with credits between 3 and 4)
 -- 你的答案 (Your answer):
-
+SELECT * FROM Course WHERE credit BETWEEN 3 AND 4;
 
 -- 表連接查詢 (JOIN Queries)
 -- =====================================================
 
 -- 9. 內連接查詢：查詢所有學生的姓名及其所屬班級名稱 (Inner join query: Query all students' names and their class names)
 -- 你的答案 (Your answer):
-
+SELECT s.name, c.class_name 
+FROM Student s 
+INNER JOIN Class c ON s.class_id = c.class_id;
 
 -- 10. 多表連接：查詢所有課程的名稱、學分數及授課教師姓名 (Multi-table join: Query all course names, credits, and teacher names)
 -- 你的答案 (Your answer):
-
+SELECT co.course_name, co.credit, t.name AS teacher_name
+FROM Course co
+INNER JOIN Teacher t ON co.teacher_id = t.teacher_id;
 
 -- 11. 複雜連接查詢：查詢每個學生的姓名、班級名稱及其選修的課程名稱 (Complex join query: Query each student's name, class name, and their enrolled course names)
 -- 你的答案 (Your answer):
+SELECT s.name as student_name, c.class_name, co.course_name
+FROM Student s 
+JOIN Class c ON s.class_id = c.class_id
+JOIN Student_Course sc ON s.student_id = sc.student_id
+JOIN Course co ON sc.course_id = co.course_id
+ORDER BY s.name, co.course_name;
 
 
 -- 12. 左連接查詢：查詢所有教師及其負責的班級（包括沒有負責班級的教師） (Left join query: Query all teachers and their responsible classes (including teachers with no classes))
 -- 你的答案 (Your answer):
-
+SELECT t.name as teacher_name, c.class_name
+FROM Teacher t 
+LEFT JOIN Class_Teacher ct ON t.teacher_id = ct.teacher_id
+LEFT JOIN Class c ON ct.class_id = c.class_id
+ORDER BY t.name;
 
 -- 高級查詢 (Advanced Queries)
 -- =====================================================
